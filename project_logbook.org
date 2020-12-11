@@ -1,0 +1,45 @@
+* Machine Learning for Finance.
+
+
+** Data Extraction:
+
+*** PyPatent
+
+    Fields list:
+
+    - filing date
+    - number of investors
+    - abstract
+    - claims
+    - description
+    - patent number
+    - patent date
+    - applicant name
+    - applicant number
+
+
+*** Company list
+
+
+   - https://www.forbes.com/sites/matthewherper/2014/05/22/new-report-ranks-22-drug-companies-based-on-rd/?sh=1b7aaed4268c
+
+**** TODO Create a list of company tickers (compatible with WRDS).
+
+**** TODO A Script that creates the feature set X, y
+
+     - Filing date
+     - Nr. of inventors
+     - Nr. of patents in the previous 1 month.
+     - Abstract NLP
+       - Sentiment score
+       - Topic modeling
+       - Create a corpora from all the patents
+       - Hot-encode the abstract/description/claims topics/keywords
+     - For the output variable:
+       - Compute the x (max 30) day return after the filing date
+       - Compute the x day return after the patent date
+
+**** TODO Create a function that extracts the bag of words from an abstract string.
+        
+     
+     
