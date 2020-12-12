@@ -1,0 +1,21 @@
+app_date,applications,Filing Date,date,Y,Date the patent application was filed (filing date)
+app_number,applications,Number,string,Y,Application ID assigned by USPTO
+assignee_organization,assignees,Organization,string,Y,"Organization name, if assignee is organization"
+cited_patent_number,cited_patents,Patent Number,string,Y,Patent number of cited patent
+citedby_patent_number,citedby_patents,Patent Number,string,Y,Patent number of citing patent
+cpc_group_title,cpcs,Group Title,string,Y,Description of CPC group
+cpc_subgroup_title,cpcs,Subgroup Title,string,Y,Description of CPC subgroup
+cpc_subsection_title,cpcs,Subsection Title,string,Y,Description of CPC subsection
+inventor_id,inventors,ID,string,Y,Unique database inventor ID by disambiguation algorithm
+nber_subcategory_title,nbers,Subcategory Title,string,Y,Description of NBER subcategory
+patent_abstract,patents,Abstract,full text,Y,Abstract of the patent
+patent_date,patents,Grant Date,date,Y,Date patent was granted
+patent_num_claims,patents,Number of Claims,integer,N,Number of claim statements on the patent
+patent_number,patents,Number,string,Y,"US Patent number, as assigned by USPTO"
+patent_processing_time,patents,Processing Time,integer,Y,Time from filing application date to grant date for the patent
+patent_title,patents,Title,full text,Y,Title of the patent
+uspc_mainclass_title,uspcs,Mainclass Title,string,Y,Description of USPC mainclass
+uspc_subclass_title,uspcs,Subclass Title,string,Y,Description of USPC subclass
+wipo_field_id,wipos,WIPO Technology Field ID,integer,Y,ID of WIPO technology field
+wipo_field_title,wipos,Technology Field Title,string,Y,Description of WIPO technology field
+wipo_sector_title,wipos,Technology Sector Title,string,Y,Description of WIPO technology sector
