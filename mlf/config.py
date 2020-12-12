@@ -30,7 +30,7 @@ NAME_TICK = {'Bristol-Myers Squibb': 'BMY',
              'Regeneron Pharmaceuticals': 'REGN',
              'Bayer Aktiengesellschaft': 'BAYRY',
              'Eli Lilly': 'LLY',
-             'AlAlexion Pharmaceuticalsexion': 'ALXN'}
+             'Alexion Pharmaceuticals': 'ALXN'}
 
 TICK_NAME = {v: k for k, v in NAME_TICK.items()}
 
