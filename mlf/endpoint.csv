@@ -16,6 +16,5 @@ patent_processing_time,patents,Processing Time,integer,Y,Time from filing applic
 patent_title,patents,Title,full text,Y,Title of the patent
 uspc_mainclass_title,uspcs,Mainclass Title,string,Y,Description of USPC mainclass
 uspc_subclass_title,uspcs,Subclass Title,string,Y,Description of USPC subclass
-wipo_field_id,wipos,WIPO Technology Field ID,integer,Y,ID of WIPO technology field
 wipo_field_title,wipos,Technology Field Title,string,Y,Description of WIPO technology field
 wipo_sector_title,wipos,Technology Sector Title,string,Y,Description of WIPO technology sector
