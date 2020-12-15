@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Created on Tue Dec 15 11:27:53 2020.
+This file is used to collection returns of stocks of interest and
+returns of the benchmark market. Data is saved in the data folder.
 
 @author: williammartin
 """

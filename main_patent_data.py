@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Created on Sat Dec 12 16:48:23 2020.
+This script downloads patent data and saves in csv.gzip files in
+data/patents/raw folder.
 
 @author: williammartin
 """
 
 # import standard libraries
 import os
-from datetime import datetime, timedelta
 # import third-party libraries
 import pandas as pd
 # import local libraries
 from mlf import query_patent, parse_patent
 from mlf import NAME_TICK
-from mlf import QUERY_FEAT
 
 if __name__ == '__main__':
 
