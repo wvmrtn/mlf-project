@@ -97,5 +97,10 @@ def parse_patent(content):
     return parsed
 
 
+def read_patent_file(filepath):
+    patent = pd.read_csv(filepath, compression='gzip')
+    return patent
+
+
 if __name__ == '__main__':
     pass
