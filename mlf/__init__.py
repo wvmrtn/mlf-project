@@ -10,6 +10,7 @@
 # import local libraries
 from .config import *
 from .patent_utils import *
+from .returns_utils import *
 
 if __name__ == '__main__':
     pass

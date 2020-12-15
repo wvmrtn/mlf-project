@@ -1,5 +1,5 @@
 *.csv
-*.gzip
+*.gz
 *.zip
 *.tar
 .DS_Store

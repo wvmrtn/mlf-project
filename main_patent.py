@@ -27,15 +27,20 @@ if __name__ == '__main__':
     end_dates = pd.date_range(start, end, freq='Y')
     end_dates = end_dates.strftime("%Y-%m-%d")
 
+    # download patent information
     for o in NAME_TICK.keys():
         for d, _ in enumerate(start_dates):
             # write only if does not exist
-            filename = 'data/patents/raw/{}_{}.csv'.format(NAME_TICK[o],
-                                                           start_dates[d][:4])
+            filename = 'data/patents/raw/{}_{}.csv.gz'
+            filename = filename.format(NAME_TICK[o], start_dates[d][:4])
+
             if not os.path.exists(filename):
                 content = query_patent(o.lower(),
                                        start_dates[d],
                                        end_dates[d])
                 parsed = parse_patent(content)
 
-                parsed.to_csv(filename)
+                parsed.to_csv(filename,
+                              compression='gzip',
+                              index=False)
+

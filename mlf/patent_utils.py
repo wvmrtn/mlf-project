@@ -41,14 +41,29 @@ def query_patent(assignee, start_date, end_date):
           '{"_lte":{"app_date":"' + end_date + '"}}' +\
           ']' +\
           '}' +\
-          '&f=' + feat
+          '&f=' + feat + \
+          '&o={"page":1,"per_page":10000}'
 
     response = requests.get(url)
     content = response.json()
 
     return content
 
+
 def parse_patent(content):
+    """Parse request content into parsed data.
+
+    Parameters
+    ----------
+    content : json
+        Content of request.
+
+    Returns
+    -------
+    parsed : pd.DataFrame
+        pd.DataFrame containing parsed patent information.
+
+    """
     parsed = pd.DataFrame(columns=QUERY_FEAT, index=range(content['count']))
     content = content['patents']
 

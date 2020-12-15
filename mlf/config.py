@@ -20,7 +20,7 @@ NAME_TICK = {'Bristol-Myers Squibb': 'BMY',
              'Vertex Pharmaceuticals': 'VRTX',
              'Gilead Sciences': 'GILD',
              #'Allergan': None,  # private company
-             'Roche': 'RHHBY',
+             #'Hoffmann-La Roche': 'RO',  # RO not available on WRDS
              'Amgen Inc': 'AMGN',
              'Johnson %26 Johnson': 'JNJ',
              'Novo Nordisk': 'NVO',
@@ -34,7 +34,7 @@ NAME_TICK = {'Bristol-Myers Squibb': 'BMY',
              'GlaxoSmithKline': 'GSK',
              'Novartis': 'NVS',
              'Regeneron Pharmaceuticals': 'REGN',
-             'Bayer Aktiengesellschaft': 'BAYRY',
+             #'Bayer': 'BAYN',  # difficult to query bayer for patent
              'Eli Lilly': 'LLY',
              'Alexion Pharmaceuticals': 'ALXN'}
 TICK_NAME = {v: k for k, v in NAME_TICK.items()}
