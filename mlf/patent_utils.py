@@ -8,12 +8,9 @@
 # import standard libraries
 import requests
 # import third-party libraries
-import dask
 import pandas as pd
 # import local libraries
 from .config import QUERY_FEAT, ENDPOINTS
-
-dask.config.set(scheduler="processes")
 
 
 def query_patent(assignee, start_date, end_date):
@@ -98,12 +95,6 @@ def parse_patent(content):
         parsed = parsed.rename(columns={'inventor_id': 'num_inventor'})
 
     return parsed
-
-
-@dask.delayed
-def read_patent_file(filepath):
-    patent = pd.read_csv(filepath, compression='gzip')
-    return patent
 
 
 if __name__ == '__main__':
