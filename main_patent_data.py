@@ -43,4 +43,3 @@ if __name__ == '__main__':
                 parsed.to_csv(filename,
                               compression='gzip',
                               index=False)
-
