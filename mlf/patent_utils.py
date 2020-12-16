@@ -50,13 +50,15 @@ def query_patent(assignee, start_date, end_date):
     return content
 
 
-def parse_patent(content):
+def parse_patent(content, tick):
     """Parse request content into parsed data.
 
     Parameters
     ----------
     content : json
         Content of request.
+    tick : str
+        Ticker of organisation.
 
     Returns
     -------
@@ -65,6 +67,7 @@ def parse_patent(content):
 
     """
     parsed = pd.DataFrame(columns=QUERY_FEAT, index=range(content['count']))
+    parsed['ticker'] = tick
     content = content['patents']
 
     if content:

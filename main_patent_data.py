@@ -38,7 +38,7 @@ if __name__ == '__main__':
                 content = query_patent(o.lower(),
                                        start_dates[d],
                                        end_dates[d])
-                parsed = parse_patent(content)
+                parsed = parse_patent(content, NAME_TICK[o])
 
                 parsed.to_csv(filename,
                               compression='gzip',
