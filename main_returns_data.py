@@ -28,3 +28,4 @@ if __name__ == '__main__':
         # download benchmark S&P 500
         returns = download_market_returns()
         returns.to_csv(filename)
+
