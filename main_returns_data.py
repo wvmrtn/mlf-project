@@ -15,14 +15,14 @@ from mlf import download_stock_returns, download_market_returns
 
 if __name__ == '__main__':
 
-    filename = 'data/returns/stock_returns.csv'
+    filename = 'data/returns/raw/stock_returns.csv'
 
     if not os.path.exists(filename):
         # download returns
         returns = download_stock_returns()
         returns.to_csv(filename)
 
-    filename = 'data/returns/market_returns.csv'
+    filename = 'data/returns/raw/market_returns.csv'
 
     if not os.path.exists(filename):
         # download benchmark S&P 500
