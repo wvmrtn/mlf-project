@@ -6,3 +6,4 @@
 .ipynb_checkpoints/
 *.numbers
 __pycache__
+*.icloud
