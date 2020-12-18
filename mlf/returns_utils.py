@@ -66,13 +66,13 @@ def download_stock_returns(start='2009-07-01', end='2019-12-31', stocks=None):
     return X
 
 
-def download_market_returns(start='2010-01-01', end='2019-12-31'):
+def download_market_returns(start='2009-07-01', end='2019-12-31'):
     """Download S&P 500 returns.
 
     Parameters
     ----------
     start : str, optional
-        Start date to download data. The default is '2010-01-01'.
+        Start date to download data. The default is '2009-07-01'.
     end : str, optional
         End date to download data. The default is '2019-12-31'.
 
@@ -97,13 +97,13 @@ def download_market_returns(start='2010-01-01', end='2019-12-31'):
     return F
 
 
-def download_rf_returns(start='2010-01-01', end='2019-12-31'):
+def download_rf_returns(start='2009-07-01', end='2019-12-31'):
     """Download riskless returns from Fama-French.
 
     Parameters
     ----------
     start : str, optional
-        Start date to download. The default is '2010-01-01'.
+        Start date to download. The default is '2009-07-01'.
     end : TYPE, optional
         End date to download. The default is '2019-12-31'.
 
