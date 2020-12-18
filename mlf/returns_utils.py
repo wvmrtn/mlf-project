@@ -13,7 +13,8 @@ import wrds
 # import local libraries
 from .config import TICK_NAME
 
-def download_stock_returns(start='2010-01-01', end='2020-11-30', stocks=None):
+
+def download_stock_returns(start='2010-01-01', end='2019-12-31', stocks=None):
     """Download stock returns from start to end.
 
     Parameters
@@ -21,7 +22,7 @@ def download_stock_returns(start='2010-01-01', end='2020-11-30', stocks=None):
     start : str, optional
         Start date to query The default is '2010-01-01'.
     end : str, optional
-        End date to query. The default is '2020-11-30'.
+        End date to query. The default is '2019-12-31'.
     stocks : list, optional
         List of stocks to download returns. The default is None.
 
@@ -65,7 +66,22 @@ def download_stock_returns(start='2010-01-01', end='2020-11-30', stocks=None):
     return X
 
 
-def download_market_returns(start='2010-01-01', end='2020-11-30'):
+def download_market_returns(start='2010-01-01', end='2019-12-31'):
+    """Download S&P 500 returns.
+
+    Parameters
+    ----------
+    start : str, optional
+        Start date to download data. The default is '2010-01-01'.
+    end : str, optional
+        End date to download data. The default is '2019-12-31'.
+
+    Returns
+    -------
+    F : pd.DataFrame
+        DataFrame containing the S&P500 returns from start to end.
+
+    """
     db = wrds.Connection(wrds_username=os.environ['WRDS_USER'],
                          wrds_password=os.environ['WRDS_PASS'])
 
@@ -80,6 +96,19 @@ def download_market_returns(start='2010-01-01', end='2020-11-30'):
 
     return F
 
+
+def download_rf_returns(start='2010-01-01', end='2019-12-31'):
+    db = wrds.Connection(wrds_username=os.environ['WRDS_USER'],
+                         wrds_password=os.environ['WRDS_PASS'])
+
+    returns = db.raw_sql("select date, rf from ff.factors_daily where "
+                         f"date >= '{start}' and date <= '{end}'"
+                         )
+
+    Rf = pd.DataFrame(returns)
+    Rf = Rf.set_index('date')
+
+    return Rf
 
 if __name__ == '__main__':
     pass
