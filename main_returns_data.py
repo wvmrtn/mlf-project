@@ -12,9 +12,11 @@ import os
 # import third-party libraries
 # import local libraries
 from mlf import download_stock_returns, download_market_returns
+from mlf import download_rf_returns
 
 if __name__ == '__main__':
 
+    # get stock returns
     filename = 'data/returns/raw/stock_returns.csv'
 
     if not os.path.exists(filename):
@@ -22,6 +24,7 @@ if __name__ == '__main__':
         returns = download_stock_returns()
         returns.to_csv(filename)
 
+    # get s&p500 returns
     filename = 'data/returns/raw/market_returns.csv'
 
     if not os.path.exists(filename):
@@ -29,3 +32,9 @@ if __name__ == '__main__':
         returns = download_market_returns()
         returns.to_csv(filename)
 
+    # get riskless rate from fama french
+    filename = 'data/returns/raw/rf_returns.csv'
+
+    if not os.path.exists(filename):
+        returns = download_rf_returns()
+        returns.to_csv(filename)
