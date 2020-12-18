@@ -12,7 +12,7 @@ import os
 # import third-party libraries
 # import local libraries
 from mlf import download_stock_returns, download_market_returns
-from mlf import download_rf_returns, download_stock_betas
+from mlf import download_rf_returns
 
 if __name__ == '__main__':
 

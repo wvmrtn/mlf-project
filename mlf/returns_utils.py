@@ -14,13 +14,13 @@ import wrds
 from .config import TICK_NAME
 
 
-def download_stock_returns(start='2010-01-01', end='2019-12-31', stocks=None):
+def download_stock_returns(start='2009-07-01', end='2019-12-31', stocks=None):
     """Download stock returns from start to end.
 
     Parameters
     ----------
     start : str, optional
-        Start date to query The default is '2010-01-01'.
+        Start date to query The default is '2009-07-01'.
     end : str, optional
         End date to query. The default is '2019-12-31'.
     stocks : list, optional
