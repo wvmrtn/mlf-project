@@ -98,6 +98,21 @@ def download_market_returns(start='2010-01-01', end='2019-12-31'):
 
 
 def download_rf_returns(start='2010-01-01', end='2019-12-31'):
+    """Download riskless returns from Fama-French.
+
+    Parameters
+    ----------
+    start : str, optional
+        Start date to download. The default is '2010-01-01'.
+    end : TYPE, optional
+        End date to download. The default is '2019-12-31'.
+
+    Returns
+    -------
+    Rf : pd.DataFrame
+        DataFrame containing the returns from start to end.
+
+    """
     db = wrds.Connection(wrds_username=os.environ['WRDS_USER'],
                          wrds_password=os.environ['WRDS_PASS'])
 
@@ -109,6 +124,7 @@ def download_rf_returns(start='2010-01-01', end='2019-12-31'):
     Rf = Rf.set_index('date')
 
     return Rf
+
 
 if __name__ == '__main__':
     pass
