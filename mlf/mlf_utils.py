@@ -82,6 +82,11 @@ class LinearRegressor(LinearRegression):
                              index_col=0)
         stocks.index = pd.to_datetime(stocks.index)
 
+        # load expenses
+        expenses = pd.read_csv('data/returns/clean/expenditures.csv',
+                               index_col=0)
+        expenses.index = pd.to_datetime(expenses.index)
+
         # load lda model
         ldamodel = gensim.models.ldamodel.LdaModel.load(
             f'data/nlp/model{num_topics}.gensim')
@@ -118,6 +123,9 @@ class LinearRegressor(LinearRegression):
         X = X.drop(columns=[remove])
         X = X.rename(columns={date_col: 'date'})
         X = X.sort_values(by='date')
+
+        # create feature with scaled R&D expenses
+        
 
         # create corpora and dictionary
         dictionary = corpora.Dictionary(list(patents['text'].values))

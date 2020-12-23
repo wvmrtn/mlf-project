@@ -126,7 +126,7 @@ def download_rf_returns(start='2009-07-01', end='2019-12-31'):
     return Rf
 
 
-def download_expenditures(start='2010-01-01', end='2019-12-31', stocks=None):
+def download_expenditures(start='2009-12-31', end='2019-12-31', stocks=None):
 
     db = wrds.Connection(wrds_username=os.environ['WRDS_USER'],
                          wrds_password=os.environ['WRDS_PASS'])
