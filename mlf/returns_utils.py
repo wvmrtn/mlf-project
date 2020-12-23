@@ -126,5 +126,32 @@ def download_rf_returns(start='2009-07-01', end='2019-12-31'):
     return Rf
 
 
+def download_expenditures(start='2010-01-01', end='2019-12-31', stocks=None):
+
+    db = wrds.Connection(wrds_username=os.environ['WRDS_USER'],
+                         wrds_password=os.environ['WRDS_PASS'])
+
+    if stocks is None:
+        stocks = list(TICK_NAME.keys())
+    ticker_query = "'" + '\', \''.join(stocks) + "'"
+
+    # get stock returns
+    data = \
+        db.raw_sql(
+            f"select tic, xrdq, xoprq, datadate from comp.fundq where tic in "
+            f"({ticker_query}) and "
+            f"datadate >= '{start}' and datadate <= '{end}'"
+            )
+
+    # get ration of r&d expenditure wrt to total operating expenses
+    data['rd_opr'] = data['xrdq']/data['xoprq']
+
+    # clean a bit
+    data = data.drop(columns=['xrdq', 'xoprq'])
+    data = data.rename(columns={'datadate': 'date'})
+    data = data.set_index('date')
+
+    return data
+
 if __name__ == '__main__':
     pass

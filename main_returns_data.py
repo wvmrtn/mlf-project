@@ -12,7 +12,7 @@ import os
 # import third-party libraries
 # import local libraries
 from mlf import download_stock_returns, download_market_returns
-from mlf import download_rf_returns
+from mlf import download_rf_returns, download_expenditures
 
 if __name__ == '__main__':
 
@@ -38,3 +38,10 @@ if __name__ == '__main__':
     if not os.path.exists(filename):
         returns = download_rf_returns()
         returns.to_csv(filename)
+
+    # get stock R&D expenditure
+    filename = 'data/returns/raw/expenditures.csv'
+
+    if not os.path.exists(filename):
+        expenditures = download_expenditures()
+        expenditures.to_csv(filename)
