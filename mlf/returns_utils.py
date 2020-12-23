@@ -150,6 +150,8 @@ def download_expenditures(start='2010-01-01', end='2019-12-31', stocks=None):
     data = data.drop(columns=['xrdq', 'xoprq'])
     data = data.rename(columns={'datadate': 'date'})
     data = data.set_index('date')
+    data = data.pivot_table(values='rd_opr', index=data.index, columns='tic',
+                            aggfunc='first')
 
     return data
 
