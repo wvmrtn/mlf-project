@@ -125,7 +125,12 @@ class LinearRegressor(LinearRegression):
         X = X.sort_values(by='date')
 
         # create feature with scaled R&D expenses
-        
+        X['rd_exp'] = np.nan
+        for i, (d, row) in enumerate(expenses.iterrows()):
+            if i < len(expenses)-1:
+                xd = X[(X['date'] >= d) & (X['date'] < expenses.index[i+1])]
+                X.at[xd.index, 'rd_exp'] = xd['ticker'].apply(
+                    lambda x: row.get(x))
 
         # create corpora and dictionary
         dictionary = corpora.Dictionary(list(patents['text'].values))
