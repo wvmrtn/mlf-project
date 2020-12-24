@@ -10,6 +10,7 @@ from datetime import timedelta
 import glob
 import re
 import numpy as np
+import pickle
 # import third-party libraries
 import gensim
 from gensim import corpora
@@ -138,7 +139,8 @@ class BaseModel():
                     lambda x: row.get(x))
 
         # create corpora and dictionary
-        dictionary = corpora.Dictionary(list(patents['text'].values))
+        dictionary = pickle.load(open('data/nlp/dictionary.pkl', 'rb'))
+        #  dictionary = corpora.Dictionary(list(patents['text'].values))
 
         # create feature with topic extraction from lda modela
         X[[f'topic{t}' for t in range(num_topics)]] = 0.0

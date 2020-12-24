@@ -23,6 +23,7 @@ if __name__ == '__main__':
     sk = sk.fit(reg.X_scaled, reg.y['y_bin'])
     X = sk.transform(reg.X_scaled)
 
+    """
     param_grid = {'C': [1, 10, 50, 1000],
                   'gamma': [1, 0.3, 0.1, 0.01]}
 
@@ -39,3 +40,4 @@ if __name__ == '__main__':
     # reg = reg.fit(X_train, y_train)
     # print(reg.score(X_train, y_train))
     # print(reg.score(X_test, y_test))
+    """
