@@ -9,24 +9,33 @@
 # import third-party libraries
 from sklearn.model_selection import train_test_split
 from sklearn.feature_selection import SelectKBest, f_regression
+from sklearn.model_selection import GridSearchCV
 # import local libraries
-from mlf import LinearRegressor
+from mlf import LinearRegressor, SVMRegressor, SVMClassifier
 
 if __name__ == '__main__':
 
-    lr = LinearRegressor()
-    lr.generate_xy(num_topics=50, num_days=3)
-    lr.scale_x()
+    reg = SVMClassifier()
+    reg.generate_xy(num_topics=100, num_days=30)
+    reg.scale_x()
 
-    # sk = SelectKBest(score_func=f_regression, k=5)
-    # sk = sk.fit(lr.X_scaled, lr.y['y_bin'])
-    # X = sk.transform(lr.X_scaled)
+    sk = SelectKBest(score_func=f_regression, k=10)
+    sk = sk.fit(reg.X_scaled, reg.y['y_bin'])
+    X = sk.transform(reg.X_scaled)
+
+    param_grid = {'C': [1, 10, 50, 1000],
+                  'gamma': [1, 0.3, 0.1, 0.01]}
 
     # separate train and test
-    X_train, X_test, y_train, y_test = train_test_split(lr.X_scaled,
-                                                        lr.y['y_ret'],
+    X_train, X_test, y_train, y_test = train_test_split(X,
+                                                        reg.y['y_bin'],
                                                         test_size=0.2)
 
-    reg = lr.fit(X_train, y_train)
-    print(reg.score(X_train, y_train))
-    print(reg.score(X_test, y_test))
+    cv = GridSearchCV(reg, param_grid)
+    cv = cv.fit(X_train, y_train)
+    print(cv.score(X_train, y_train))
+    print(cv.score(X_test, y_test))
+
+    # reg = reg.fit(X_train, y_train)
+    # print(reg.score(X_train, y_train))
+    # print(reg.score(X_test, y_test))

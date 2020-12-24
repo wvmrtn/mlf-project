@@ -16,13 +16,13 @@ from gensim import corpora
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
+from sklearn.svm import SVR, SVC
 # import local libraries
 
 
-class LinearRegressor(LinearRegression):
+class BaseModel():
 
     def __init__(self):
-        super().__init__()
         self.X = pd.DataFrame()
         self.X_info = pd.DataFrame()
         self.y = pd.DataFrame()
@@ -178,6 +178,23 @@ class LinearRegressor(LinearRegression):
         self.y = y
 
         return X, y
+
+
+class LinearRegressor(LinearRegression, BaseModel):
+
+    def __init__(self):
+        super().__init__()
+
+
+class SVMRegressor(SVR, BaseModel):
+
+    def __init__(self, gamma='scale', C=1.0):
+        super().__init__(gamma=gamma, C=C)
+        
+class SVMClassifier(SVC, BaseModel):
+
+    def __init__(self, gamma='scale', C=1.0):
+        super().__init__(gamma=gamma, C=C)
 
 
 if __name__ == '__main__':
