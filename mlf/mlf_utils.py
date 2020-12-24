@@ -61,6 +61,11 @@ class BaseModel():
             DataFrame containing labels.
 
         """
+        self.num_topics = num_topics
+        self.num_days = num_days
+        self.keep_app = keep_app
+        self.delay = delay
+
         # get available topics
         NUM_TOPICS = glob.glob(r'data/nlp/*.gensim')
         NUM_TOPICS = [int(re.findall(r'\d+', s)[0]) for s in NUM_TOPICS]
