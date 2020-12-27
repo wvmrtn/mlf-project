@@ -70,7 +70,7 @@ class BaseModel():
         # get available topics
         NUM_TOPICS = glob.glob(r'data/nlp/*.gensim')
         NUM_TOPICS = [int(re.findall(r'\d+', s)[0]) for s in NUM_TOPICS]
-        NUM_DAYS = list(range(2, 31))
+        NUM_DAYS = list(range(2, 61))
 
         assert num_topics in\
             NUM_TOPICS, f'LDA model not found for {num_topics} topics'
@@ -197,11 +197,14 @@ class SVMRegressor(SVR, BaseModel):
 
     def __init__(self, gamma='scale', C=1.0):
         super().__init__(gamma=gamma, C=C)
-        
+
+    
 class SVMClassifier(SVC, BaseModel):
 
     def __init__(self, gamma='scale', C=1.0):
         super().__init__(gamma=gamma, C=C)
+        self.train_acc = None
+        self.test_acc = None
 
 
 if __name__ == '__main__':
