@@ -18,6 +18,11 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.svm import SVR, SVC
+import tensorflow.keras as keras
+from keras.layers import Dense
+from keras.models import Sequential
+from keras.initializers import RandomUniform
+from keras.optimizers import SGD
 # import local libraries
 
 
@@ -205,6 +210,38 @@ class SVMClassifier(SVC, BaseModel):
         super().__init__(gamma=gamma, C=C)
         self.train_acc = None
         self.test_acc = None
+
+
+class NNClassifier(Sequential, BaseModel):
+
+    def __init__(self):
+        super().__init__()
+
+    def add_layers(self, features_dim, neurons, layers, activation='sigmoid'):
+        init = RandomUniform(minval=-1, maxval=1)
+
+        # Input layer:
+        self.add(Dense(units=neurons,
+                       input_dim=features_dim,
+                       activation='sigmoid',
+                       kernel_initializer=init,
+                       bias_initializer=init))
+
+        # Add dense layers in sequence
+        for i in range(layers):
+            self.add(Dense(units=neurons,
+                           activation=activation,
+                           kernel_initializer=init,
+                           bias_initializer=init))
+
+        # Output layer:
+        self.add(Dense(1, activation='sigmoid', kernel_initializer=init))
+
+
+    def define_optimizer(self, lr):
+        opt = SGD(lr=lr, momentum=0.9)
+        self.compile(loss='binary_crossentropy', optimizer=opt,
+                     metrics=['accuracy'])
 
 
 if __name__ == '__main__':
