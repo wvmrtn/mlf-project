@@ -7,3 +7,6 @@
 *.numbers
 __pycache__
 *.icloud
+logs/
+*.png
+data/.DS_Store
