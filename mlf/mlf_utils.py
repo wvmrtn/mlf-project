@@ -17,6 +17,8 @@ from gensim import corpora
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVR, SVC
 import tensorflow.keras as keras
 from keras.layers import Dense
@@ -34,6 +36,11 @@ class BaseModel():
         self.y = pd.DataFrame()
         self.X_scaled = pd.DataFrame()
         self.scaler = None
+        self.num_feat = None
+        
+        # save some results of each model
+        self.train_acc = None
+        self.test_acc = None
 
     def scale_x(self, scaler=StandardScaler):
         self.scaler = scaler()
@@ -112,7 +119,7 @@ class BaseModel():
         X.loc[:, 'patent_date'] = pd.to_datetime(X.loc[:, 'patent_date'])
 
         # create feature with number of patent applications filed
-        # in the last 60 days.
+        # in the last {delay} days.
         X['num_app_prior'] = np.nan
         for ticker, x in X.groupby('ticker'):
             for i, patent in x.iterrows():
@@ -196,20 +203,32 @@ class LinearRegressor(LinearRegression, BaseModel):
 
     def __init__(self):
         super().__init__()
-
+        
 
 class SVMRegressor(SVR, BaseModel):
 
     def __init__(self, gamma='scale', C=1.0):
         super().__init__(gamma=gamma, C=C)
 
+
+class LogisticRegressor(LogisticRegression, BaseModel):
     
+    def __init__(self, C=1.0):
+        super().__init__(C=C)
+        
+
+class TreeClassifier(DecisionTreeClassifier, BaseModel):
+    
+    def __init__(self, criterion='gini', min_samples_split=2, 
+                 min_samples_leaf=1, max_leaf_nodes=None):
+        super().__init__(criterion=criterion, min_samples_split=min_samples_split,
+                         min_samples_leaf=min_samples_leaf, max_leaf_nodes=max_leaf_nodes)
+
+
 class SVMClassifier(SVC, BaseModel):
 
     def __init__(self, gamma='scale', C=1.0):
         super().__init__(gamma=gamma, C=C)
-        self.train_acc = None
-        self.test_acc = None
 
 
 class NNClassifier(Sequential, BaseModel):
@@ -232,14 +251,16 @@ class NNClassifier(Sequential, BaseModel):
             self.add(Dense(units=neurons,
                            activation=activation,
                            kernel_initializer=init,
-                           bias_initializer=init))
+                           bias_initializer=init,
+                           activity_regularizer='l1',
+                           ))
 
         # Output layer:
         self.add(Dense(1, activation='sigmoid', kernel_initializer=init))
 
 
-    def define_optimizer(self, lr):
-        opt = SGD(lr=lr, momentum=0.9)
+    def define_optimizer(self, lr, momentum=0.9):
+        opt = SGD(lr=lr, momentum=momentum)
         self.compile(loss='binary_crossentropy', optimizer=opt,
                      metrics=['accuracy'])
 
